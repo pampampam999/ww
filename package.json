@@ -1,0 +1,7 @@
+{
+	"dependencies": {
+		"discord.js": "^14.13.0"
+		
+	},
+	"main":"index.js"
+}
