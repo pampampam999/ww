@@ -32,6 +32,7 @@ module.exports={
           );
     
         // Digunakan untuk menyingkronkan table di MySQL
+        //await Game.sync({alter:true});
         // await Game.sync({force:true});
 
         const guild_id = interaction.guildId;
