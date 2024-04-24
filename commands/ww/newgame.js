@@ -32,15 +32,43 @@ module.exports={
           );
     
         // Digunakan untuk menyingkronkan table di MySQL
-        //await Game.sync({alter:true});
+        // await Game.sync({force:true});
 
         const guild_id = interaction.guildId;
         const channel_id = interaction.channelId;
         const mod_id = interaction.user.id;
 
-        try {
+      // mencari dulu apa ada game yang active di server itu
+      try {
+        const game_id = await Game.findOne({
+          attributes:[
+            [sequelize.fn('MAX',sequelize.col('id')),'maxId']
+          ],
+          where:{
+            guild_id:guild_id,
+            status:1
+          }
+        });
+
+        if(game_id.dataValues.maxId===null){
+          // Jika sebelumnya tidak ada data maka membuat data baru
+        }else{
+          //console.log('Terdapat game yang berjalan');
+          return await interaction.reply('Terdapat game yang berjalan');
+        }
+      } catch (error) {
+        if (error.name === 'SequelizeUniqueConstraintError') {
+          return await interaction.reply('That tag already exists.');
+        }
+  
+        return await interaction.reply('Something went wrong with search a tag.');
+      }
+
+
+    // Menambahkan data ke dalam database
+      try {
 			// equivalent to: INSERT INTO tags (name, description, username) values (?, ?, ?);
-			const coba = await Game.create({
+			const game = await Game.create({
 				guild_id: guild_id,
 				channel_id: channel_id,
 				mod_id: mod_id,
