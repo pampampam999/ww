@@ -1,8 +1,22 @@
 {
+	"name": "discord-werewolf",
+	"description": "Bot Discord dengan integrasi database menggunakan Discord.js dan Sequelize. Untuk menentukan role acak permainan werewolf",
+	"version": "1.0.0",
+	"main": "index.js",
+	"author": "pampampam999 <pampampam.turki@gmail.com>",
+	"license": "MIT",
+	"engines": {
+		"node": ">=14",
+		"pnpm":">=9.0.5"
+
+	},
+	"scripts": {
+		"start": "node index.js",
+		"test": "jest"
+	},
 	"dependencies": {
 		"discord.js": "^14.13.0",
 		"mariadb": "^3.2.2",
 		"sequelize": "^6.34.0"
-	},
-	"main": "index.js"
+	}
 }
